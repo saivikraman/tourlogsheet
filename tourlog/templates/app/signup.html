@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="icon" href="{% static 'app/favicon.ico' %}">
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'app/style.css' %}"> -->
+  <style>
+    .color { 
+  color:#E5E5E5;
+  color:#4286F5;
+  color:#A2EEEA;
+  color:#82D8F1;
+}
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right,#155799,#159957);
+  /* background-color:  #555555; */
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card{
+  width: 500px;
+  height: 540px;
+  background-color: rgba(11, 15, 13, 0.582);
+  box-shadow: rgba(133, 127, 127, 0.922) 0px 2px 4px;
+  border-left: 30px solid #000000;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.card h3{
+  color:#ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.form-group{
+  margin-bottom: 20px;
+}
+.form-group label,.form-group input{
+display: block;
+}
+.form-group label{
+  font-size: 13px;
+  text-transform: uppercase;
+  color:#ffffff;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.form-group input{
+  width: 80%;
+  height: 35px;
+  border: none;
+  outline: none;
+  background: #E5E5E5;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.more{
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color:#A1A1A1;
+  margin-bottom: 20px;
+}
+
+.more a{
+  color:#25ae33;
+  text-decoration: none;
+}
+
+
+.card button{
+  background-color: #3613a9;
+  color:#fff;
+  width: 80%;
+  height: 30px;
+  border: none;
+  border-radius :3px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.mark
+{
+color: #ffffff;
+}
+.link
+{
+color: rgb(74,146,235)
+}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h3>Account Sign Up</h3>
+    <form method="POST" action="" autocomplete="off">
+       {% csrf_token %}
+      <!--<div class="form-group">
+        <label for="{{ form.EMP_ID.id_for_label }}">EMP_ID</label>
+        {{ form.EMP_ID }}
+      </div> -->
+      <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">Username</label>
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Email</label>
+        {{ form.email }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}">Password</label>
+        {{ form.password1 }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}">Re-enter your Password</label>
+        {{ form.password2 }}
+      </div>
+    
+      <button>Create User</button>
+      <br>
+      <br>
+      <br>
+      <div class="mark">
+        {{ form.errors }}
+      </div>
+      <br>
+      <label class="mark">Already have an account <a class="link" href="{% url 'tourlog:home' %}">login</a></label>
+    </form>
+  </div>
+</body>
+</html>

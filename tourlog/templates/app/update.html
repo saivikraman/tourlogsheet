@@ -1,0 +1,301 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Log Sheet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5namexbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'app/favicon.ico' %}">
+    <style>
+        .container {
+            background-color: rgb(255, 255, 255);
+            padding: 15px;
+        }
+        .row {
+            background-color: rgb(255, 255, 255);
+            padding: 1px;
+        }
+        .col,
+        .col-8,
+        .col-6,
+        .col-4,
+        .col-md-8,
+        .col-1,
+        .col-3,
+        .col-md-4 {
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+        }
+        .table {
+            background-color: rgb(255, 255, 255);
+            padding: 5px;
+            border: 1px solid rgb(6, 6, 6);
+        }
+        .col-2 {
+            text-align-last: left;
+        }
+        .col-auto {
+            padding: 1px;
+        }
+        .input[type="number"] {
+            width: 40%;
+            font-size: 10px;
+        }
+        .input[type="text"] {
+            width: 50%;
+            font-size: 10px;
+        }
+        .oate {
+            text-align-last: right;
+            font-size: 10px;
+        }
+        .cert {
+            text-align-last: left;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+        }
+        .custom-size {
+            flex: 1;
+            width: 30%;
+        }
+        .custom-des {
+            flex: 1;
+            width: 30%;
+            height: 50%;
+        }
+        .table th,
+        .table td {
+            border: 1px solid #000;
+        }
+        .custom-pno {
+            flex: 1;
+            width: 10%;
+        }
+        .mark {
+            line-height: 12px;
+            width: 18px;
+            font-size: 8pt;
+            font-family: tahoma;
+            margin-top: 1px;
+            margin-right: 2px;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .top-right-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .d-flex.justify-content-center {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .btn {
+            margin: 0 5px;
+        }
+        .view-details {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-offset-3 col-md-5">
+            <form action="{% url 'tourlog:reg' %}" method="POST" autocomplete="off">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <label for="code">EmpCode</label>
+                        <input type="number" value="{{data.EmpCode}}" name="code" class="custom-des" required>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-row">
+                            <label for="name">Name</label>
+                            <select name="salutation" required>
+                                <option value="{{data.salutation}}">Mr</option>
+                                <option value="{{data.salutation}}">Ms</option>
+                            </select>
+                            <input type="text" value="{{data.Name}}" name="name" class="input" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="des">Desg</label>
+                        <input type="text" value="{{data.Desg}}" name="des" class="custom-des" required>
+                    </div>
+                    <div class="col">
+                        <label for="pay">GradePay</label>
+                        <input type="text" value="{{data.Grade_Pay}}" name="pay" class="custom-des" required>
+                    </div>
+                    <div class="col">
+                        <label for="age">Age</label>
+                        <input type="number" value="{{data.Age}}" name="age" class="custom-des" required>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <label for="ename">Email_name</label>
+                        <input type="text" value="{{data.Email_ID}}" name="ename" class="input" required>
+                    </div>
+                    <div class="col">
+                        <label for="ph">Phone</label>
+                        <input type="number" value="{{data.Phone}}" name="ph" class="input" required>
+                    </div>
+                    <div class="col">
+                        <label for="mob">Mobile</label>
+                        <input type="number" value="{{data.Mobile}}" name="mob" class="input" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="addr">Office_Address</label>
+                        <input type="text" value="{{data.Office_Address}}" name="addr" class="input" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="pt">Purpose_of_Tour</label>
+                        <input type="text" value="{{data.Purpose_of_Tour}}" name="pt" class="input" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="name">Budget Head:</label>
+                        </div>
+                        <div class="col-4">
+                            <br>
+                            <input type="checkbox" name="exp" value="NICSI_Expenditure" {% if data.NICSI_Expenditure %}checked{% endif %}> NICSI_Expenditure<br>
+                            <div class="form-row">
+                                <input type="checkbox" name="pexp" value="Project_Expenditure" {% if data.Project_Expenditure %}checked{% endif %}> Project_Expenditure&nbsp;
+                                <label for="pn">Project_No</label>
+                                <input type="text" name="pn" class="custom-pno" value="{{ data.Project_No }}">
+                            </div>
+                        </div>
+                        
+                        <div class="col"></div>
+                        <div class="col">
+                            <label for="name">Advance Required:</label>
+                        </div>
+                        <div class="col-3">
+                            <br>
+                                <input type="checkbox" name="advance_required" id="no" value="no" {% if data.no %}checked{% endif %}> NO<br>
+                                <input type="checkbox" name="advance_required" id="yes" value="yes" {% if data.yes %}checked{% endif %}> YES &nbsp;
+                                <label for="rs">Rs</label>
+                                <input type="number" name="rs" class="custom-size" value="{{ data.Rs }}">
+                          </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date of Travel</th>
+                            <th>From (Place)</th>
+                            <th>To (Place)</th>
+                            <th>Mode of Travel</th>
+                            <th>Flight No.</th>
+                            <th>Dprt. Date</th>
+                            <th>Dprt. Time</th>
+                            <th>Arrival Date</th>
+                            <th>Arrival Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows with borders -->
+                        <!-- Repeat the rows here with unique input names -->
+                        
+                        <tr>
+                            <td><input type="date" name="travel_date1" id="travel_date1" value="{{ data.travel_date1 }}"></td>
+                            <td><input type="text" name="from_place1"value="{{ data.from_place1 }}"></td>
+                            <td><input type="text" name="to_place1" value="{{ data.to_place1 }}"></td>
+                            <td><input type="text" name="mode_of_travel1"value="{{ data.mode_of_travel1 }}"></td>
+                            <td><input type="text" name="flight_number1"value="{{ data.flight_number1 }}"></td>
+                            <td><input type="date" name="departure_date1" id="departure_date1"value="{{ data.departure_date1 }}"></td>
+                            <td><input type="time" name="departure_time1"value="{{ data.departure_time1 }}"></td>
+                            <td><input type="date" name="arrival_date1" id="arrival_date1"value="{{ data.arrival_date1 }}"></td>
+                            <td><input type="time" name="arrival_time1"value="{{ data.arrival_time1 }}"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" name="travel_date2" id="travel_date2" value="{{ data.travel_date2 }}"></td>
+                            <td><input type="text" name="from_place2"value="{{ data.from_place2 }}"></td>
+                            <td><input type="text" name="to_place2"value="{{ data.to_place2 }}"></td>
+                            <td><input type="text" name="mode_of_travel2"value="{{ data.mode_of_travel2 }}"></td>
+                            <td><input type="text" name="flight_number2"value="{{ data.flight_number2 }}"></td>
+                            <td><input type="date" name="departure_date2" id="departure_date2"value="{{ data.departure_date2 }}"></td>
+                            <td><input type="time" name="departure_time2"value="{{ data.departure_time2 }}"></td>
+                            <td><input type="date" name="arrival_date2" id="arrival_date2"value="{{ data.arrival_date2 }}"></td>
+                            <td><input type="time" name="arrival_time2"value="{{ data.arrival_time2 }}"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" name="travel_date3" id="travel_date3" value="{{ data.travel_date3 }}"></td>
+                            <td><input type="text" name="from_place3"value="{{ data.from_place3 }}"></td>
+                            <td><input type="text" name="to_place3"value="{{ data.to_place3 }}"></td>
+                            <td><input type="text" name="mode_of_travel3"value="{{ data.mode_of_travel3 }}"></td>
+                            <td><input type="text" name="flight_number3"value="{{ data.flight_number3 }}"></td>
+                            <td><input type="date" name="departure_date3" id="departure_date3"value="{{ data.departure_date3 }}"></td>
+                            <td><input type="time" name="departure_time3"value="{{ data.departure_time3 }}"></td>
+                            <td><input type="date" name="arrival_date3" id="arrival_date3"value="{{ data.arrival_date3 }}"></td>
+                            <td><input type="time" name="arrival_time3"value="{{ data.arrival_time3 }}"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" name="travel_date4" id="travel_date4" value="{{ data.travel_date4 }}"></td>
+                            <td><input type="text" name="from_place4"value="{{ data.from_place4 }}"></td>
+                            <td><input type="text" name="to_place4"value="{{ data.to_place4 }}"></td>
+                            <td><input type="text" name="mode_of_travel4"value="{{ data.mode_of_travel4 }}"></td>
+                            <td><input type="text" name="flight_number4"value="{{ data.flight_number4 }}"></td>
+                            <td><input type="date" name="departure_date4" id="departure_date4"value="{{ data.departure_date4 }}"></td>
+                            <td><input type="time" name="departure_time4"value="{{ data.departure_time4 }}"></td>
+                            <td><input type="date" name="arrival_date4" id="arrival_date4"value="{{ data.arrival_date4 }}"></td>
+                            <td><input type="time" name="arrival_time4"value="{{ data.arrival_time4 }}"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="date" name="travel_date5" id="travel_date5" value="{{ data.travel_date5 }}"></td>
+                            <td><input type="text" name="from_place5"value="{{ data.from_place5 }}"></td>
+                            <td><input type="text" name="to_place5"value="{{ data.to_place5 }}"></td>
+                            <td><input type="text" name="mode_of_travel5"value="{{ data.mode_of_travel5 }}"></td>
+                            <td><input type="text" name="flight_number5"value="{{ data.flight_number5 }}"></td>
+                            <td><input type="date" name="departure_date5" id="departure_date5"value="{{ data.departure_date5 }}"></td>
+                            <td><input type="time" name="departure_time5"value="{{ data.departure_time5 }}"></td>
+                            <td><input type="date" name="arrival_date5" id="arrival_date5"value="{{ data.arrival_date5 }}"></td>
+                            <td><input type="time" name="arrival_time5"value="{{ data.arrival_time5 }}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group pull right">
+                    <input type="submit" value="update" class="btn btn-primary">
+                </div>
+                
+            </form>
+        </div>
+
+                  
+                  <!-- Center-align the buttons -->
+                  <!-- <div class="d-flex justify-content-center">
+                      <button class="btn bg-body"><a href="reg.html">1</a></button>
+                      <button class="btn btn-outline-success"><a href="reg1.html">2</a></button>
+                  </div> -->
+    </div>

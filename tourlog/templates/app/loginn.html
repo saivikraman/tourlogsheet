@@ -1,0 +1,178 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Login</title>
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'app/style1.css' %}"> -->
+  <link rel="icon" href="{% static 'app/favicon.ico' %}">
+  <style>
+    .color { 
+    color:#E5E5E5;
+    color:#4286F5;
+    color:#A2EEEA;
+    color:#82D8F1;
+  }
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body{
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right,#155799,#159957);
+    /* background-color: none; */
+    /* background: transparent; */
+    /* background-image: url('app/nic.jpg') no-repeat center center/cover  ; */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card{
+    width: 500px;
+    height: 500px;
+    background-color: rgba(11, 15, 13, 0.582);
+    box-shadow: rgba(133, 127, 127, 0.922) 0px 2px 4px;
+    border-left: 30px solid #000000;
+    padding: 30px;
+    border-radius: 5px;
+  }
+  
+  .card h3{
+    color:#ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .form-group{
+    margin-bottom: 20px;
+  }
+  .form-group label,.form-group input{
+  display: block;
+  }
+  .form-group label{
+    font-size: 13px;
+    text-transform: uppercase;
+    color:#ffffff;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .form-group input{
+    width: 100%;
+    height: 35px;
+    border: none;
+    outline: none;
+    background: #E5E5E5;
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  .more{
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color:#A1A1A1;
+    margin-bottom: 20px;
+  }
+  
+  .more a{
+    color:#25ae33;
+    text-decoration: none;
+  }
+  
+  
+  .card button{
+    background-color: #3613a9;
+    color:#fff;
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius :3px;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .mark
+{
+  color: #ffffff;
+}
+.link
+{
+  color: rgb(74,146,235)
+}
+.loading-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    .loading-spinner {
+      border: 16px solid #f3f3f3;
+      border-top: 16px solid #3498db;
+      border-radius: 40%;
+      width: 70px;
+      height: 70px;
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-container" id="loadingContainer">
+    <div class="loading-spinner"></div>
+  </div>
+  <div class="card">
+    <h3>Account Login</h3>
+    <form method="POST" action="" autocomplete="off" onsubmit="showLoading()">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">Username</label>
+        <input type="text" id="name" name="username" class="index">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" class="index">
+    </div>
+    <div class="form-group">
+      <label for="EMP_ID">EMP_ID</label>
+      <input type="number" id="EMP_ID" name="EMP_ID" class="index">
+    </div>
+    <button type="submit">Login</button>
+    <br>
+    <br>
+    {% for message in messages %}
+     <p class="mark" id="messages">{{message}}</p>
+    {% endfor %}
+    <br>
+    <label class="mark">Don't have an account?<a class="link" href="{% url 'tourlog:signup' %}">Sign Up</a></label>
+    </form>
+  </div>
+
+  <script>
+    function showLoading() {
+      document.getElementById('loadingContainer').style.display = 'flex';
+      
+      setTimeout(() => {
+        document.getElementById('loadingContainer').style.display = 'none';
+      }, 3000);  
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Log Sheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/base.css">
+  <style>
+    body {
+    margin: 0;
+  }
+
+  .container {
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding: 10px;
+    margin-left: 15px;
+    width: 100%;
+  }
+    /* .container {
+        background-color: #ffffff;
+        margin-top: 20px ;
+        padding: 10px;
+        margin-left: 15px;
+        width: 300%;
+      } */
+    .row {
+      background-color: rgb(255, 255, 255);
+      padding: 1px;
+    }
+    .col,
+    .col-8,
+    .col-6,
+    .col-4,
+    .col-md-8,
+    .col-1,
+    .col-3,
+    .col-md-4 {
+      background-color: rgb(255, 255, 255);
+      padding: 10px;
+    }
+    table {
+        /* background-color: rgb(255, 255, 255); */
+        background-color: #ffffff;
+        margin-left: 15px;
+        width: 5px;
+        /* padding: 5px; */
+        /* border: 1px solid rgb(6, 6, 6); */
+      }
+    .col-2 {
+      text-align-last: left;
+    }
+    .col-auto {
+      padding: 1px;
+    }
+    .input[type="number"] {
+      width: 40%;
+      font-size: 10px;
+    }
+    .input[type="text"] {
+      width: 50%;
+      font-size: 10px;
+    }
+    .oate {
+      text-align-last: right;
+      font-size: 10px;
+    }
+    .cert {
+      text-align-last: left;
+    }
+    .form-row {
+      display: flex;
+      align-items: center;
+    }
+    .custom-size {
+      flex: 1;
+      width: 30%;
+    }
+    .custom-des {
+      flex: 1;
+      width: 30%;
+      height: 50%;
+    }
+    .table th,
+    .table td {
+      border: 1px solid #000;
+    }
+    .top-right-button {
+        margin-left: 5px;
+        position: absolute;
+        top: 0.5px;
+        bottom: 2500px;
+        right: 0px;
+        margin-right: 10px;
+
+      }
+      .smaller-table {
+            width: 80%; 
+            max-width: none;
+            font-size: 8pt; 
+            height: 4%;
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form action="" method="POST" autocomplete="off">
+        {% csrf_token %}
+    <div class="row">
+      <div class="col">
+        <label for="code">Emp.Code</label>
+        <input type="number" value="{{data.EmpCode}}"  id="code" class="custom-des">
+      </div>
+      <div class="col-3">
+        <div class="form-row">
+          <label for="name">Name:</label>
+          <form>
+            <select name="salutation">
+                <option value="{{data.salutation}}">Mr</option>
+                <option value="{{data.salutation}}">Ms</option>
+            </select>
+          </form>
+          <input type="text" id="name" value="{{data.Name}}" class="input">
+        </div>
+      </div>
+      <div class="col">
+        <label for="des">Desg:</label>
+        <input type="text" value="{{data.Desg}}" id="des" class="custom-size1">
+      </div>
+      <div class="col">
+        <label for="pay">Grade Pay:</label>
+        <input type="text" value="{{data.Grade_Pay}}" id="pay" class="custom-size2">
+      </div>
+      <div class="col">
+        <label for="age">Age:</label>
+        <input type="number"  value="{{data.Age}}" id="age" class="custom-des">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label for="id">Email ID:</label>
+        <input type="text" value="{{data.Email_ID}}" id="id" class="input">
+      </div>
+      <div class="col">
+        <label for="ph">Phone (off):</label>
+        <input type="number" value="{{data.Phone}}" id="ph" class="custom-size2">
+      </div>
+      <div class="col">
+        <label for="mob">Mobile:</label>
+        <input type="number" value="{{data.Mobile}}" id="mob" class="custom-size2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="addr">Office Address:</label>
+        <input type="text" value="{{data.Office_Address}}" id="addr" class="input">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="pt">Purpose of Tour:</label>
+        <input type="text" value="{{data.Purpose_of_Tour}}" id="pt" class="input">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-row">
+        <div class="col">
+            <label for="name">Budget Head:</label>
+          </div>
+        <div class="col-4">
+            <input type="radio" value="NICSI_Expenditure" id="exp" {% if data.NICSI_Expenditure %}checked{% endif %}>NICSI Expenditure<br>
+            <div class="form-row">
+              <input type="radio" value="Project_Expenditure" id="pexp" {% if data.Project_Expenditure %}checked{% endif %}>Project Expenditure&nbsp;
+              <label for="pn">Project No</label>
+              <input type="text" id="pn" class="custom-size" value="{{ data.Project_No }}">
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <label for="name">Advance Required:</label>
+        </div>
+        <div class="col-3">
+            <br>
+            <input type="radio" name="advance_required" id="no" value="no" {% if data.no %}checked{% endif %}> NO<br>
+            <input type="radio" name="advance_required" id="yes" value="yes" {% if data.yes %}checked{% endif %}> YES &nbsp;
+            <label for="rs">Rs</label>
+            <input type="number" name="rs" class="custom-size" value="{{ data.Rs }}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <!-- <div class="table"> -->
+      <table class="table tab smaller-table">
+          <thead>
+            <tr>
+              <th>Date of Travel</th>
+              <th>From (Place)</th>
+              <th>To (Place)</th>
+              <th>Mode of Travel</th>
+              <th>Flight No.</th>
+              <th>Dprt. Date</th>
+              <th>Dprt. Time</th>
+              <th>Arrival Date</th>
+              <th>Arrival Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rows with borders -->
+            <tr>
+                <td><input type="date" name="travel_date1" id="travel_date1" value="{{ data.travel_date1 }}"></td>
+                <td><input type="text" name="from_place1"value="{{ data.from_place1 }}"></td>
+                <td><input type="text" name="to_place1" value="{{ data.to_place1 }}"></td>
+                <td><input type="text" name="mode_of_travel1"value="{{ data.mode_of_travel1 }}"></td>
+                <td><input type="text" name="flight_number1"value="{{ data.flight_number1 }}"></td>
+                <td><input type="date" name="departure_date1" id="departure_date1"value="{{ data.departure_date1 }}"></td>
+                <td><input type="time" name="departure_time1"value="{{ data.departure_time1 }}"></td>
+                <td><input type="date" name="arrival_date1" id="arrival_date1"value="{{ data.arrival_date1 }}"></td>
+                <td><input type="time" name="arrival_time1"value="{{ data.arrival_time1 }}"></td>
+            </tr>
+            <tr>
+                <td><input type="date" name="travel_date2" id="travel_date2" value="{{ data.travel_date2 }}"></td>
+                <td><input type="text" name="from_place2"value="{{ data.from_place2 }}"></td>
+                <td><input type="text" name="to_place2"value="{{ data.to_place2 }}"></td>
+                <td><input type="text" name="mode_of_travel2"value="{{ data.mode_of_travel2 }}"></td>
+                <td><input type="text" name="flight_number2"value="{{ data.flight_number2 }}"></td>
+                <td><input type="date" name="departure_date2" id="departure_date2"value="{{ data.departure_date2 }}"></td>
+                <td><input type="time" name="departure_time2"value="{{ data.departure_time2 }}"></td>
+                <td><input type="date" name="arrival_date2" id="arrival_date2"value="{{ data.arrival_date2 }}"></td>
+                <td><input type="time" name="arrival_time2"value="{{ data.arrival_time2 }}"></td>
+            </tr>
+            <tr>
+                <td><input type="date" name="travel_date3" id="travel_date3" value="{{ data.travel_date3 }}"></td>
+                <td><input type="text" name="from_place3"value="{{ data.from_place3 }}"></td>
+                <td><input type="text" name="to_place3"value="{{ data.to_place3 }}"></td>
+                <td><input type="text" name="mode_of_travel3"value="{{ data.mode_of_travel3 }}"></td>
+                <td><input type="text" name="flight_number3"value="{{ data.flight_number3 }}"></td>
+                <td><input type="date" name="departure_date3" id="departure_date3"value="{{ data.departure_date3 }}"></td>
+                <td><input type="time" name="departure_time3"value="{{ data.departure_time3 }}"></td>
+                <td><input type="date" name="arrival_date3" id="arrival_date3"value="{{ data.arrival_date3 }}"></td>
+                <td><input type="time" name="arrival_time3"value="{{ data.arrival_time3 }}"></td>
+            </tr>
+            <tr>
+                <td><input type="date" name="travel_date4" id="travel_date4" value="{{ data.travel_date4 }}"></td>
+                <td><input type="text" name="from_place4"value="{{ data.from_place4 }}"></td>
+                <td><input type="text" name="to_place4"value="{{ data.to_place4 }}"></td>
+                <td><input type="text" name="mode_of_travel4"value="{{ data.mode_of_travel4 }}"></td>
+                <td><input type="text" name="flight_number4"value="{{ data.flight_number4 }}"></td>
+                <td><input type="date" name="departure_date4" id="departure_date4"value="{{ data.departure_date4 }}"></td>
+                <td><input type="time" name="departure_time4"value="{{ data.departure_time4 }}"></td>
+                <td><input type="date" name="arrival_date4" id="arrival_date4"value="{{ data.arrival_date4 }}"></td>
+                <td><input type="time" name="arrival_time4"value="{{ data.arrival_time4 }}"></td>
+            </tr>
+            <tr>
+                <td><input type="date" name="travel_date5" id="travel_date5" value="{{ data.travel_date5 }}"></td>
+                <td><input type="text" name="from_place5"value="{{ data.from_place5 }}"></td>
+                <td><input type="text" name="to_place5"value="{{ data.to_place5 }}"></td>
+                <td><input type="text" name="mode_of_travel5"value="{{ data.mode_of_travel5 }}"></td>
+                <td><input type="text" name="flight_number5"value="{{ data.flight_number5 }}"></td>
+                <td><input type="date" name="departure_date5" id="departure_date5"value="{{ data.departure_date5 }}"></td>
+                <td><input type="time" name="departure_time5"value="{{ data.departure_time5 }}"></td>
+                <td><input type="date" name="arrival_date5" id="arrival_date5"value="{{ data.arrival_date5 }}"></td>
+                <td><input type="time" name="arrival_time5"value="{{ data.arrival_time5 }}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="oate">
+      <label>I undertake that I shall submit TA/DA bill along with boarding passes to NICSI within 15 days of tour</label> 
+      <br>
+      <label>completion. Beyond 15 days, bills of booking agency for air travel can be settled by NICS at my risk</label>
+      <br>
+      <br>
+      <label>Sign of officer</label>
+      <br>
+      <input type="file" id="uploadedFile" accept="image/*">
+        <div id="imageContainer"></div>
+        
+        <script>
+          const fileInput = document.getElementById('uploadedFile');
+          const imageContainer = document.getElementById('imageContainer');
+        
+          fileInput.addEventListener('change', (event) => {
+              const file = event.target.files[0];
+              const reader = new FileReader();
+        
+              reader.onload = (e) => {
+                  const img = document.createElement('img');
+                  img.src = e.target.result;
+                  img.width=200;
+                  // img.height=100;
+                  imageContainer.innerHTML = ''; 
+                  imageContainer.appendChild(img);
+              };
+        
+              reader.readAsDataURL(file);
+          });
+        </script>
+
+        <br>
+        <label >Sign of officer</label>
+        <br>
+        <div class="cert">
+          <label>Certifed that the funds are available in project</label>
+          <br>
+          <br>
+          <label>Approval/comments</label>
+          <br>
+          <br>
+        </div>
+        <div class="row clr">
+          <div class="col-2">
+            <label>Name:</label><br>
+            <label>Emp. Code:</label>
+          </div>
+          <div class="col-1 clr">
+            <label>Designation:</label>
+          </div>
+          <div class="col clr"></div>
+          <div class="col-1 clr">
+            <label class="lab">DG (NIC)</label><br>
+            <label class="lab1">(For nic Officer)</label>
+          </div>
+        </div>
+        
+        <button class="btn btn-link top-right-button">
+        <a class="link" href="{% url 'tourlog:logout' %}">Logout</a>
+        </button>
+        <button id="printButton">Print This Page</button>
+        
+        
+        <script>
+          
+          document.getElementById("printButton").addEventListener("click", function() {
+              
+              window.print();
+          });
+        </script>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        </div>
+        </body>
+        </html>

@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <script>
+            // Get the EMP_ID value from a Django context variable
+            var empId = {{ EmpCode }};
+            
+            // Construct the URL using the empId variable
+            var updateUrl = `http://127.0.0.1:8000/final/${empId}`;
+          
+            // Redirect to the constructed URL
+            window.location.href = updateUrl;
+          </script>
+    </body>
+</html>
